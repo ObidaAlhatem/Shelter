@@ -1,6 +1,9 @@
 package com.life.shelter.people.homeless;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -79,11 +82,22 @@ public class home extends AppCompatActivity
             Intent it = new Intent(home.this, Developers.class);
             startActivity(it);
         } else if (id == R.id.nav_share) {
+            Intent share =new Intent(Intent.ACTION_SEND);
+            share.setType("text/plain");
+            share.putExtra(Intent.EXTRA_SUBJECT,"My app");
+            String appLink ="https://play.google.com/store/apps?hl=ar";
+            share.putExtra(Intent.EXTRA_TEXT,"Try my new app: " + appLink);
+            startActivity(Intent.createChooser(share, "Share Via"));
 
         } else if (id == R.id.nav_rate) {
 
+            try {
+                Intent rateIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps?hl=ar" + "com.life.shelter.people.homeless"));
+                startActivity(rateIntent);
 
-
+                } catch (ActivityNotFoundException e) {
+                Intent rateIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps?hl=ar" + "com.life.shelter.people.homeless"));
+                startActivity(rateIntent); }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

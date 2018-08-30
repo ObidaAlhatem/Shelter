@@ -14,20 +14,20 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        Thread timer =new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }finally {
-                    Intent intent=new Intent(SplashActivity.this,home.class);
-                    startActivity(intent);
-                }
-            }
-        }) ;
+
+        Thread timer = new Thread(){
+          @Override
+          public void run() {
+              try {
+                  sleep(5000);
+                  Intent intent = new Intent (SplashActivity.this,home.class);
+                  startActivity(intent);
+                  finish();
+              } catch (InterruptedException e) {
+                  e.printStackTrace();
+              }
+          }
+        };
         timer.start();
     }
-
 }
